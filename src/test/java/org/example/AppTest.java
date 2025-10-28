@@ -16,7 +16,7 @@ public class AppTest {
     static public String USER_EMAIL = "avramrobert2060@gmail.com";
     static public String USER_GENDER = "Male";
     static public String DATE = "21 Jan 2005";
-    static public String NUMBER = "079028010";
+    static public String NUMBER = "0790280100";
     static public String USER_HOBBY = "Sports";
     static public String USER_SUBJECT = "Maths";
     static public String USER_STATE = "NCR";
@@ -45,8 +45,10 @@ public class AppTest {
         form.setDateOfBirthInput(DATE);
         form.setHobby(USER_HOBBY);
         form.setSubject(USER_SUBJECT);
+        form.setAdress(USER_ADRESS);
         form.setState(USER_STATE);
         form.setCity(USER_CITY);
+        form.setSubmit();
         System.out.printf("");
     }
 

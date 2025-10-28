@@ -3,6 +3,10 @@ package pom;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
 
 public class FormPom {
 
@@ -26,6 +30,10 @@ public class FormPom {
     WebElement state;
     @FindBy(xpath = "//*[@id='city']")  // example, replace with your element’s xpath
     WebElement city;
+    @FindBy(xpath = "//*[@id='currentAddress']")  // example, replace with your element’s xpath
+    WebElement currentAddress;
+    @FindBy(xpath = "//*[@id='submit']")  // example, replace with your element’s xpath
+    WebElement submit;
 
     public FormPom(WebDriver driver) {
         this.driver = driver;
@@ -79,15 +87,32 @@ public class FormPom {
     }
 
 
-    public void setState(String StateParam){
+    public void setState(String StateParam) {
         state.click();
-        driver.findElement(By.xpath("//*text()='" + StateParam + "']"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement stateItem = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//*[text()='" + StateParam + "']")));
+        stateItem.click();
     }
 
     public void setCity(String CityParam){
         city.click();
-        driver.findElement(By.xpath("//*text()='" + CityParam + "']"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement stateItem = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//*[text()='" +CityParam + "']")));
+        stateItem.click();
     }
+
+    public void setAdress(String AdressParam) {
+    currentAddress.clear();
+    currentAddress.sendKeys(AdressParam);
+    }
+
+    public void setSubmit(){
+        submit.click();
+    }
+
+
 
     public void scrollToDateOfBirth(){
         scrollToElement(dateOfBirthInput);
@@ -113,5 +138,6 @@ public class FormPom {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
+
 
 }
