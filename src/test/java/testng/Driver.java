@@ -19,9 +19,9 @@ public class Driver {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--headless=new"); // folosește headless în CI/CD sau teste automate
+        options.addArguments("--headless=new");
         options.addArguments("--disable-gpu");
-        options.addArguments("--user-data-dir=/tmp/local-profile-" + System.currentTimeMillis()); // profil unic
+        options.addArguments("--user-data-dir=/tmp/local-profile-" + System.currentTimeMillis());
         return new ChromeDriver(options);
     }
 
@@ -32,7 +32,7 @@ public class Driver {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless=new");
         options.addArguments("--disable-gpu");
-        options.addArguments("--user-data-dir=/tmp/remote-profile-" + System.currentTimeMillis()); // profil unic
+        options.addArguments("--user-data-dir=/tmp/remote-profile-" + System.currentTimeMillis());
 
         Map<String, Object> selenoidOptions = new HashMap<>();
         selenoidOptions.put("enableVNC", true);
