@@ -2,26 +2,44 @@ package testng;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static javax.swing.UIManager.put;
 
 public class Driver {
     public static WebDriver getLocalDriver() {
+        WebDriverManager.chromedriver().setup();
+        return new ChromeDriver();
+    }
+
+    public static RemoteWebDriver getRemoteDriver() {
+        ChromeOptions options = new ChromeOptions();
+
+        Map<String, Object> selenoidOptions = new HashMap<>();
+        selenoidOptions.put("enableVNC", true);
+        selenoidOptions.put("enableVideo", true);
+        selenoidOptions.put("enableLog", true);
+        selenoidOptions.put("name", "Test badge");
+        selenoidOptions.put("sessionTimeout", "15m");
+
+        options.setCapability("selenoid:options", selenoidOptions);
+
+        RemoteWebDriver driver = null;
         try {
-            WebDriverManager.chromedriver().setup();
-
-            ChromeOptions options = new ChromeOptions();
-            Path tempUserDataDir = Files.createTempDirectory(Path.of("/tmp"), "chrome-user-data-");
-            options.addArguments("--user-data-dir=" + tempUserDataDir.toAbsolutePath());
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--headless=new");
-
-            return new ChromeDriver(options);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create ChromeDriver", e);
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
+
+        return driver;
     }
 }
