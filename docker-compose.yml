@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  selenoid:
+    image: selenoid/vnc_chrome:128.0
+    ports:
+      - "4444:4444"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  video-recorder:
+    image: selenoid/video-recorder:latest-release
