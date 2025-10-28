@@ -7,22 +7,32 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static javax.swing.UIManager.put;
-
 public class Driver {
+
+    // Driver local
     public static WebDriver getLocalDriver() {
         WebDriverManager.chromedriver().setup();
-        return new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--headless=new"); // folosește headless în CI/CD sau teste automate
+        options.addArguments("--disable-gpu");
+        options.addArguments("--user-data-dir=/tmp/local-profile-" + System.currentTimeMillis()); // profil unic
+        return new ChromeDriver(options);
     }
 
+    // Driver remote (Selenoid / Selenium Grid)
     public static RemoteWebDriver getRemoteDriver() {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--headless=new");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--user-data-dir=/tmp/remote-profile-" + System.currentTimeMillis()); // profil unic
 
         Map<String, Object> selenoidOptions = new HashMap<>();
         selenoidOptions.put("enableVNC", true);

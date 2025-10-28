@@ -28,7 +28,7 @@ public class AppTest {
 
     @BeforeClass
     public void setUp() {
-        driver = Driver.getLocalDriver();
+        driver = Driver.getRemoteDriver();
         driver.manage().window().maximize();
     }
 
