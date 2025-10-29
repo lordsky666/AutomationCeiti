@@ -82,11 +82,13 @@ public class FormPom {
         hobby.click();
     }
 
-    public void setSubject(String SubjectParam) throws InterruptedException {
-        subjectsInput.sendKeys(SubjectParam);
-        Thread.sleep(1000);
-        subjectsInput.sendKeys(Keys.TAB);
-        System.out.println();
+    public void setSubject(String SubjectParam) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement input = wait.until(ExpectedConditions.visibilityOf(subjectsInput));
+        scrollToElement(input);
+        input.click();
+        input.sendKeys(SubjectParam);
+        input.sendKeys(Keys.TAB);
     }
 
 
