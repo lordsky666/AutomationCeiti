@@ -62,16 +62,19 @@ public class FormPom {
         gender.click();
     }
 
-    public void setNumber(String numberParam){
+    public void setNumber(String numberParam) {
         userNumber.clear();
         userNumber.sendKeys(numberParam);
     }
 
-    public void setDateOfBirthInput(String dateOfBirthInputp){
-        dateOfBirthInput.sendKeys(Keys.COMMAND,"a");
+    public void setDateOfBirthInput(String dateOfBirthInputp) {
+        if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+            dateOfBirthInput.sendKeys(Keys.COMMAND, "a");
+        } else {
+            dateOfBirthInput.sendKeys(Keys.CONTROL, "a");
+        }
         dateOfBirthInput.sendKeys(dateOfBirthInputp);
         dateOfBirthInput.sendKeys(Keys.ENTER);
-
     }
 
     public void setHobby(String hobbyParam){

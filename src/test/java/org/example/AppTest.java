@@ -27,13 +27,13 @@ public class AppTest {
 
     @BeforeClass
     public void setUp() {
-        driver = Driver.getLocalDriver(); // sau getRemoteDriver() dacă folosești Selenoid
+        driver = Driver.getLocalDriver();
         driver.manage().window().maximize();
+        driver.get(URL);
     }
 
     @Test
     public void fillFormTest() throws InterruptedException {
-        driver.get(URL);
         FormPom form = new FormPom(driver);
 
         form.closeAdvert();
