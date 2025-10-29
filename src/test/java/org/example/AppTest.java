@@ -42,6 +42,7 @@ public class AppTest {
         form.setFirstName(USER_NAME);
         form.setLastName(USER_SURNAME);
         form.setEmail(USER_EMAIL);
+        form.scrollEmail();
         form.setGender(USER_GENDER);
         form.setNumber(NUMBER);
         form.scrollToDateOfBirth();

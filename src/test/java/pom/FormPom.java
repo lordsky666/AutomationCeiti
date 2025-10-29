@@ -115,6 +115,9 @@ public class FormPom {
         submit.click();
     }
 
+    public void scrollEmail(){
+        scrollToElement(userEmail);
+    }
 
 
     public void scrollToDateOfBirth(){
