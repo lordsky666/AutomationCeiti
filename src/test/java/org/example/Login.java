@@ -15,7 +15,7 @@ public class Login {
     @Test
     public void LoginTest() throws InterruptedException {
 
-        WebDriver driver = Driver.getLocalDriver();
+        WebDriver driver = Driver.getRemoteDriver();
         driver.manage().window().maximize();
         driver.get(URL);
 
